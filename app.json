@@ -1,0 +1,32 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/home/home",
+    "pages/tabBar/tabBar"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#f0f0f0",
+    "navigationBarTitleText": "微信小程序",
+    "navigationBarTextStyle":"#000000"
+  },
+  "tabBar": {
+    "color":"blue",
+    "selectedColor":"green",
+    "position":"bottom",
+    "borderStyle":"black",
+    "backgroundColor":"#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath":"images/wechat.png",
+      "selectedIconPath":"images/wechatHL.png"
+    }, {
+      "pagePath": "pages/logs/logs",
+      "text": "日志",
+      "iconPath":"images/icon_API.png",
+      "selectedIconPath":"images/icon_API_HL.png"
+    }]
+  }
+}

@@ -1,0 +1,4 @@
+<view class="tabBAr">
+    <view>tabBar测试页面</view>
+     <button bindtap="getDate">{{get}}</button>
+</view>

@@ -1,0 +1,4 @@
+<!--home.wxml-->
+<view class="home">
+    <view>主页测试页面</view>
+</view>

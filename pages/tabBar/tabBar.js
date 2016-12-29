@@ -1,0 +1,21 @@
+Page({
+    data:{
+        get:"获取本地数据缓存"
+    },
+    getDate:function(){
+        // console.log(1)
+        wx.setNavigationBarTitle({
+            title:"当前页面"
+        })
+        wx.setStorage({
+            key:"key",
+            data:'我是储存数据'
+        })
+        wx.getStorage({
+            key:"key",
+            success:function(e){
+                console.log(e.data)
+            }
+        })
+    }
+})
