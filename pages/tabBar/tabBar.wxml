@@ -1,4 +1,6 @@
 <view class="tabBAr">
     <view>tabBar测试页面</view>
+     <button bindtap="setDate">{{set}}</button>
      <button bindtap="getDate">{{get}}</button>
+     <button bindtap="setTitle">{{title}}</button>
 </view>

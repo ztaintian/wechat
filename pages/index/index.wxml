@@ -4,20 +4,23 @@
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>-->
-  <navigator class="home"  url="../home/home" ><view>跳转到主页</view></navigator>
-  <navigator class="home"  url="../tabBar/tabBar"><view>跳转到tabBar</view></navigator>
-  <button bindtap="getData">得到tabBar页面数据</button>
-  <button bindtap="getSystem">得到system数据</button>
-  <button bindtap="getPhone">得到Phone</button>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="title">1、navigator组件跳转页面路由</view>
+  <view class="home_flex">
+    <navigator class="home"  url="../home/home" >跳转到主页</navigator>
+    <navigator class="home"  url="../tabBar/tabBar">跳转到tabBar</navigator>
   </view>
+  <view class="title">2、数据处理</view>
+  <button bindtap="getData">得到tabBar页面数据</button>
+  <button bindtap="getSystem">得到操作system数据</button>
+  <button bindtap="getPhone">得到phoneNumber</button>
+  <!--<view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>-->
+  <view class="title">3、wx:for与wx:if</view>
   <block  wx:if="{{condition}}">
     <view wx:for="{{lists}}" wx:key="*this" >{{item}}</view>
   </block>
   <switch wx:for="{{objectArray}}" wx:key="unique" > {{item.unique}} </switch>
-  <div>1111</div>
-  <p>hellow</p>
   <view id="tapTest" data-hi="WeChat" bindtap="tapName"> Click me! </view>
   <switch  bindchange="switch1Change"/>
   
