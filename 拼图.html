@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绚丽个人相册</title>
+    <script src="jquery-2.2.4.js"></script>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box}
+        html,body{width: 100%;height: 100%;font-size: 14px}
+        #main{min-width:1000px;min-height:800px;height: 100%;width: 100%;background-image: url("img/008.jpg");position: relative}
+        #bgName{
+            height: 180px;
+            width: 300px;
+            position: relative;
+            top:50px;left: 50px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-image: url("img/jay.png");
+        }
+        #bgDog{
+            height:360px;
+            width:300px;
+            position: absolute;
+            bottom:20px;
+            right:20px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-image: url("img/g.png");
+        }
+        #photoBox{
+            height: 80%;
+            width: 90%;
+            position: relative;
+            top:-10%;
+            left:6%;
+        }
+        li{
+            display: block;
+            height: 100px;
+            width:160px;
+            float: left;
+            border:solid 5px white;
+            position: absolute;
+            bottom:-100px;
+            left: calc(50% - 80px);
+            background-size: 100% 100%;
+            transition: all 1s;
+        }
+        .border{
+            /*border:solid 0.001px #999;*/
+            border:none;
+            border-bottom: solid 0.01px #999;
+            border-right: solid 0.01px #999;
+        }
+        #left,#right{
+            height: 50px;
+            width: 80px;
+            font-size: 20px;
+            position: absolute;
+            background-color: #18c6EA;
+        }
+        #left{
+            left:0px;
+            top:calc(50% - 25px);
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        #right{
+            right:0px;
+            top:calc(50% - 25px);
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            box-shadow: 2px 2px 2px 2px black;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="bgName"></div>
+    <div id="bgDog"></div>
+    <section id="photoBox">
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+    </section>
+    <button id="left"><span>Last</span></button>
+    <button id="right"><span>Next</span></button>
+</div>
+</body>
+<script>
+    $(function(){
+        var X,Y;
+        var num = null;
+        var flag = false;
+        //重新获取位置
+        function update(){
+            X = $('#photoBox')[0].offsetWidth;
+            Y = $('#photoBox')[0].offsetHeight;
+        };
+        clickOpen();
+        //点击拼图函数
+        $('li').each(function(index){
+            $(this).click(function(){
+                !flag?clickChange():clickOpen();
+                //切割图片函数
+                if(flag){
+                    puzzie();
+                    $('li').css('backgroundImage','url(img/'+index+'.jpg');
+                    return num = index;
+                };
+            });
+        });
+        //拼图函数
+        function puzzie(){
+            $('li').each(function(index){
+                $('li').css('backgroundSize','800px 500px');
+                $(this).css('backgroundPosition',(5-index%5)+"00%"+ (parseInt(index/5)+1)+"00%");
+            });
+        };
+        //炸开函数
+        function  clickOpen(){
+            update();
+            flag = false;
+            $('li').each(function(index){
+                $('li')[index].style.backgroundImage = "url(img/"+index+".jpg";
+                $('li')[index].style.bottom = parseInt(index/5)*0.2*Y+Y*0.1-50+"px";
+                $('li')[index].style.left = X*0.2*(index%5)+X*0.1-80+"px";
+                $('li').css('backgroundSize','100% 100%');
+                $('li')[index].className = "";
+            });
+            $('button').css('display','none');
+            //随机旋转角度
+            $("li").each(function () {
+                $(this).css("transform", "rotate(" + (Math.random()*40-20) + "deg)");
+            });
+        };
+        //拼接函数
+        function clickChange(){
+            update();
+            flag = true;
+            $('li').each(function(index){
+                $('li')[index].style.bottom = (Y-500)/2+parseInt(index/5)*100+"px";
+                $('li')[index].style.left = (X-800)/2+index%5*160+"px";
+                $('li')[index].className = "border";
+            });
+            $('button').css('display','block');
+            //随机角度回归
+            $("li").each(function () {
+                $(this).css("transform", "rotate(0deg)");
+            });
+        }
+        //按钮前进后退
+        $('#left').click(function(){
+            num--;
+            if(num>=0){
+                puzzie();
+                $('li').css('backgroundImage','url(img/'+num+'.jpg');
+            }else{
+                num = 24;
+                $('li').css('backgroundImage','url(img/'+num+'.jpg');
+            };
+        });
+        $('#right').click(function(){
+            num++;
+            if(num<25){
+                puzzie();
+                $('li').css('backgroundImage','url(img/'+num+'.jpg');
+            }else{
+                num = 0;
+                $('li').css('backgroundImage','url(img/'+num+'.jpg');
+            };
+        });
+        //随时监听页面变化
+        $(window).resize(function(){
+            clickOpen();
+        });
+    });
+</script>
+</html>
