@@ -13,6 +13,7 @@
   <button bindtap="getData">得到tabBar页面数据</button>
   <button bindtap="getSystem">得到操作system数据</button>
   <button bindtap="getPhone">得到phoneNumber</button>
+  <navigator url="www.baidu.com">jjjjjj</navigator>
   <!--<view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>-->
