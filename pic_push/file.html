@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>上传</title><!--https://git.oschina.net/webh5/www/blob/master/file/file.html?dir=0&filepath=file%2Ffile.html&oid=4d1a71e50c2268a29ad9a15f16d1e563d00c9180&sha=8daf068536d5a0fcfc1bcce5ad2265db06e111b2-->
+    <style>
+        .sss{
+            width: 300px;
+            height: 400px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<input class="aaa" type="file">
+<button onclick="submit()">提交</button>
+<img src="#" alt="tulian" class="sss">
+
+</body>
+<script src="jquery.min.js"></script>
+<script>
+    // http://www.jq22.com/
+    //
+    //
+    var img = null;
+    $(".aaa").change(function(event) {
+        img = this.value;
+        console.log(img);
+        // $(".sss").css("background-image", "url("+img+")");
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return;//判断有没有文件和浏览器支持不支持上传的原生方法，不支持就结束函数
+        if (/^image/.test( files[0].type)){//判断选择的文件类型是不是img
+            var reader = new FileReader();//html5原生的上传方法
+            reader.readAsDataURL(files[0]);//加载图片的路径
+            reader.onloadend = function(){//加载完毕后的回调
+                console.log(this);
+                img = this.result;
+                $(".sss").attr('src', this.result);
+            }
+        }
+    });
+    function submit(){
+        $.ajax({
+                    url: 'http://www.baidu.com',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {param1: img},
+                })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    alert("message")
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+
+    }
+</script>
+</html>
